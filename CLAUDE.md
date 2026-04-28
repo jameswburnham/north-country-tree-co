@@ -72,7 +72,11 @@ src/
 | Footer           | ✅     | [Footer.tsx](src/components/Footer.tsx) |
 | Chatbot widget   | ✅     | [Chatbot.tsx](src/components/Chatbot.tsx) |
 | Chatbot API      | ✅     | [api/chat/route.ts](src/app/api/chat/route.ts) — Edge runtime, Anthropic Haiku 4.5 streaming |
-| Polish pass      | ⏳     | not started                       |
+| Polish pass      | ✅     | Mobile QA, keyboard nav, favicon, OG image, Lighthouse-driven a11y fixes |
+
+## Lighthouse scores (mobile, live URL)
+
+Last run after polish pass: **Performance 98 · Accessibility 100 · Best Practices 100 · SEO 100**.
 
 ## Decisions / departures from spec
 
@@ -97,13 +101,14 @@ These are intentional and worth knowing before changing:
 - Add a real favicon — currently using Next.js default. Spec calls for a simple pine tree, dark green on cream.
 - Add OG image (placeholder fine for portfolio).
 
-**Polish pass (next session):**
-- Lighthouse 90+ targets (Perf/A11y/Best/SEO) — run on the live URL
-- Mobile QA at 375px on every section
-- Full keyboard navigation walkthrough
-- Alt-text audit
-- `scroll-mt-20` on remaining anchor sections (currently only on Quote Form section)
-- Confirm the Vercel auto-deploy pipeline is healthy (it is as of last session)
+**Polish pass — completed 2026-04-28:**
+- ✅ Lighthouse on live URL: 98 / 100 / 100 / 100
+- ✅ Mobile QA at 375px (no overflow, all tap targets ≥44×44, inputs ≥16px to prevent iOS zoom)
+- ✅ Keyboard nav: focus-visible rings on every interactive element, Tab focus trap in the gallery lightbox
+- ✅ Alt-text tightened on Hero
+- ✅ scroll-mt-20 on Services + Gallery + Quote Form
+- ✅ Pine-tree favicon ([icon.svg](src/app/icon.svg))
+- ✅ Dynamic OG image at 1200×630 ([opengraph-image.tsx](src/app/opengraph-image.tsx))
 
 **Cleanup (low priority):**
 - Delete `kenny-v8KJtySAi9k-unsplash.jpg` from project root — leftover from hero-image hunt (gitignored, but still occupies disk).

@@ -5,6 +5,7 @@ import TrustStrip from '@/components/TrustStrip';
 import Gallery from '@/components/Gallery';
 import QuoteForm from '@/components/QuoteForm';
 import Footer from '@/components/Footer';
+import Chatbot from '@/components/Chatbot';
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
         <QuoteForm />
       </main>
       <Footer />
+      <Chatbot />
     </>
   );
 }

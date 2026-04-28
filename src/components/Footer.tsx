@@ -34,13 +34,19 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-cream/85">
               <li className="flex items-start gap-2">
                 <Phone className="mt-0.5 h-4 w-4 flex-shrink-0" aria-hidden="true" />
-                <a href={PHONE_HREF} className="hover:underline">
+                <a
+                  href={PHONE_HREF}
+                  className="rounded-sm hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-forest"
+                >
                   {PHONE_DISPLAY}
                 </a>
               </li>
               <li className="flex items-start gap-2">
                 <Mail className="mt-0.5 h-4 w-4 flex-shrink-0" aria-hidden="true" />
-                <a href={`mailto:${EMAIL}`} className="hover:underline">
+                <a
+                  href={`mailto:${EMAIL}`}
+                  className="rounded-sm hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-forest"
+                >
                   {EMAIL}
                 </a>
               </li>

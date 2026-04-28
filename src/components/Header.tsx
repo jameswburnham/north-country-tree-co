@@ -31,7 +31,11 @@ export default function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6 md:py-4">
-        <a href="#main" aria-label="North Country Tree Co. home" className="rounded">
+        <a
+          href="#main"
+          aria-label="North Country Tree Co. home"
+          className="rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+        >
           <Logo />
         </a>
 
@@ -40,14 +44,14 @@ export default function Header() {
             <a
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-charcoal transition-colors hover:text-forest"
+              className="rounded-sm text-sm font-medium text-charcoal transition-colors hover:text-forest focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-4 focus-visible:ring-offset-cream"
             >
               {item.label}
             </a>
           ))}
           <a
             href={PHONE_HREF}
-            className="inline-flex items-center gap-2 rounded-md bg-forest px-4 py-2 text-sm font-semibold text-cream transition-colors hover:bg-forest-dark"
+            className="inline-flex items-center gap-2 rounded-md bg-forest px-4 py-2 text-sm font-semibold text-cream transition-colors hover:bg-forest-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
           >
             <Phone className="h-4 w-4" aria-hidden="true" />
             {PHONE_DISPLAY}
@@ -58,7 +62,7 @@ export default function Header() {
           <a
             href={PHONE_HREF}
             aria-label={`Call ${PHONE_DISPLAY}`}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-forest text-cream"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-md bg-forest text-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
           >
             <Phone className="h-5 w-5" aria-hidden="true" />
           </a>
@@ -68,7 +72,7 @@ export default function Header() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((o) => !o)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-md text-charcoal hover:bg-black/5"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-md text-charcoal hover:bg-black/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
           >
             {open ? (
               <X className="h-5 w-5" aria-hidden="true" />
@@ -91,7 +95,7 @@ export default function Header() {
                 <a
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="block py-3 text-base font-medium text-charcoal hover:text-forest"
+                  className="block rounded-sm py-3 text-base font-medium text-charcoal hover:text-forest focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest"
                 >
                   {item.label}
                 </a>
@@ -100,7 +104,7 @@ export default function Header() {
             <li>
               <a
                 href={PHONE_HREF}
-                className="block py-3 text-base font-semibold text-forest"
+                className="block rounded-sm py-3 text-base font-semibold text-forest focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest"
               >
                 {PHONE_DISPLAY}
               </a>

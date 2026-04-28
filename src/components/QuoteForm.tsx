@@ -139,7 +139,7 @@ export default function QuoteForm() {
                 <button
                   type="submit"
                   disabled={status === 'submitting'}
-                  className="inline-flex items-center justify-center rounded-md bg-forest px-6 py-3 text-base font-semibold text-cream transition-colors hover:bg-forest-dark disabled:cursor-not-allowed disabled:opacity-70 sm:px-8"
+                  className="inline-flex items-center justify-center rounded-md bg-forest px-6 py-3 text-base font-semibold text-cream transition-colors hover:bg-forest-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2 focus-visible:ring-offset-cream disabled:cursor-not-allowed disabled:opacity-70 sm:px-8"
                 >
                   {status === 'submitting' ? 'Sending…' : 'Request Free Quote'}
                 </button>

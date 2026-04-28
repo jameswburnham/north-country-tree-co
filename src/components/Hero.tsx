@@ -12,7 +12,7 @@ export default function Hero() {
     <section className="relative h-screen max-h-[800px] min-h-[600px] w-full overflow-hidden bg-forest-dark">
       <Image
         src={HERO_IMAGE}
-        alt="Arborist working high in a tree with climbing gear"
+        alt="Arborist in a hard hat using a chainsaw to cut a large tree trunk, with sawdust flying"
         fill
         priority
         sizes="100vw"
@@ -34,13 +34,13 @@ export default function Hero() {
         <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:gap-4 md:mt-10">
           <a
             href="#contact"
-            className="inline-flex items-center justify-center rounded-md bg-forest px-6 py-3.5 text-base font-semibold text-cream shadow-lg shadow-black/20 transition-all hover:bg-forest-dark hover:shadow-xl sm:px-8 sm:text-lg"
+            className="inline-flex items-center justify-center rounded-md bg-forest px-6 py-3.5 text-base font-semibold text-cream shadow-lg shadow-black/20 transition-all hover:bg-forest-dark hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-forest sm:px-8 sm:text-lg"
           >
             Get a Free Quote
           </a>
           <a
             href={PHONE_HREF}
-            className="inline-flex items-center justify-center gap-2 rounded-md border-2 border-cream bg-transparent px-6 py-3.5 text-base font-semibold text-cream transition-colors hover:bg-cream hover:text-forest sm:px-8 sm:text-lg"
+            className="inline-flex items-center justify-center gap-2 rounded-md border-2 border-cream bg-transparent px-6 py-3.5 text-base font-semibold text-cream transition-colors hover:bg-cream hover:text-forest focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-forest sm:px-8 sm:text-lg"
           >
             <Phone className="h-5 w-5" aria-hidden="true" />
             Call {PHONE_DISPLAY}

@@ -52,19 +52,27 @@ src/
     Footer.tsx       # forest-green, 3-col
 ```
 
+## Live site
+
+- **Production:** https://north-country-tree-co-demo.vercel.app
+- **GitHub:** https://github.com/jameswburnham/north-country-tree-co
+- **Vercel project:** `devant/north-country-tree-co-demo`
+- **Auto-deploy:** every push to `main` deploys to production via the Vercel GitHub integration
+
 ## What's built
 
-| Section      | Status | File                              |
-| ------------ | ------ | --------------------------------- |
-| Header       | ✅     | [Header.tsx](src/components/Header.tsx) |
-| Hero         | ✅     | [Hero.tsx](src/components/Hero.tsx) |
-| Services     | ✅     | [Services.tsx](src/components/Services.tsx) |
-| Trust Strip  | ✅     | [TrustStrip.tsx](src/components/TrustStrip.tsx) |
-| Gallery      | ✅     | [Gallery.tsx](src/components/Gallery.tsx) |
-| Quote Form   | ✅     | [QuoteForm.tsx](src/components/QuoteForm.tsx) |
-| Footer       | ✅     | [Footer.tsx](src/components/Footer.tsx) |
-| Chatbot      | ⏳     | not started                       |
-| Polish pass  | ⏳     | not started                       |
+| Section          | Status | File                              |
+| ---------------- | ------ | --------------------------------- |
+| Header           | ✅     | [Header.tsx](src/components/Header.tsx) |
+| Hero             | ✅     | [Hero.tsx](src/components/Hero.tsx) |
+| Services         | ✅     | [Services.tsx](src/components/Services.tsx) |
+| Trust Strip      | ✅     | [TrustStrip.tsx](src/components/TrustStrip.tsx) |
+| Gallery          | ✅     | [Gallery.tsx](src/components/Gallery.tsx) |
+| Quote Form       | ✅     | [QuoteForm.tsx](src/components/QuoteForm.tsx) |
+| Footer           | ✅     | [Footer.tsx](src/components/Footer.tsx) |
+| Chatbot widget   | ✅     | [Chatbot.tsx](src/components/Chatbot.tsx) |
+| Chatbot API      | ✅     | [api/chat/route.ts](src/app/api/chat/route.ts) — Edge runtime, Anthropic Haiku 4.5 streaming |
+| Polish pass      | ⏳     | not started                       |
 
 ## Decisions / departures from spec
 
@@ -77,21 +85,29 @@ These are intentional and worth knowing before changing:
 - **Section eyebrows** (small green tracked-out caps above H2s) are added as a polish touch — they're not in the spec but make the page read more "agency" than "template". Used on Services, Gallery, and Quote Form.
 - **Lightbox is hand-built**, not a library. Keyboard nav (←/→/Esc), backdrop-click close, body-scroll lock, focus rings.
 - **Gallery fade-in** uses Intersection Observer with a 60ms stagger across tiles. Respects `prefers-reduced-motion`.
+- **Chatbot model is `claude-haiku-4-5`** (canonical alias, not the date-suffixed form). Per Anthropic's docs and the `claude-api` skill, dated suffixes shouldn't be used for new code.
+- **System prompt forbids markdown** — chat UI renders text as-is, so any asterisks/bold would show as literal characters. Discovered during end-to-end testing when emergency response came back with `**(518) 555-0142**`.
+- **`max_tokens: 1024`** on the chat route — system prompt requires 1–3 sentence responses; this caps cost at ~$0.005/response while leaving room for longer replies if needed.
+- **Three-layer chatbot error handling:** 503 (no API key) → 400 (bad body) → in-stream fallback with the phone number (SDK throws mid-stream). The user always sees a graceful "call us at (518) 555-0142" message regardless of what fails.
 
 ## TODOs
 
 **Before demoing to a prospect:**
 - **Swap Formspree endpoint** in [QuoteForm.tsx:10](src/components/QuoteForm.tsx:10) — currently `https://formspree.io/f/PLACEHOLDER`. Submitting now hits the error state. Alternative: add a `DEMO_MODE` flag that fakes success.
-- Set `ANTHROPIC_API_KEY` in `.env.local` (see [.env.example](.env.example)) once the chatbot is wired up.
 - Add a real favicon — currently using Next.js default. Spec calls for a simple pine tree, dark green on cream.
 - Add OG image (placeholder fine for portfolio).
 
-**Build remaining:**
-- **Chatbot** — floating widget, bottom-right, sticky on scroll. Streamed responses from Anthropic API at `/api/chat`. System prompt and full requirements are in the original spec; ask the user to re-paste if context is lost.
-- **Polish pass** — Lighthouse 90+ targets (Perf/A11y/Best/SEO), mobile QA at 375px on every section, full keyboard navigation, alt text audit.
+**Polish pass (next session):**
+- Lighthouse 90+ targets (Perf/A11y/Best/SEO) — run on the live URL
+- Mobile QA at 375px on every section
+- Full keyboard navigation walkthrough
+- Alt-text audit
+- `scroll-mt-20` on remaining anchor sections (currently only on Quote Form section)
+- Confirm the Vercel auto-deploy pipeline is healthy (it is as of last session)
 
-**Cleanup:**
-- Delete `kenny-v8KJtySAi9k-unsplash.jpg` from project root — leftover from hero-image hunt (user dropped it in to suggest as a hero, but it was portrait orientation and didn't fit).
+**Cleanup (low priority):**
+- Delete `kenny-v8KJtySAi9k-unsplash.jpg` from project root — leftover from hero-image hunt (gitignored, but still occupies disk).
+- **Vercel: orphaned `SB_builder_demo` env var** — user created this by mistake when looking for the standard `ANTHROPIC_API_KEY` slot. Real key is now under `ANTHROPIC_API_KEY`. The orphan can be deleted from Vercel → Settings → Environment Variables.
 
 ## Things NOT to add (per spec)
 

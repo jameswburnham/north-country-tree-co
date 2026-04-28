@@ -74,7 +74,7 @@ export default function Gallery() {
   }, [openIndex, close, next, prev]);
 
   return (
-    <section id="gallery" className="bg-cream py-20 md:py-28">
+    <section id="gallery" className="scroll-mt-20 bg-cream py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <div className="mb-12 text-center md:mb-16">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-forest">
@@ -179,8 +179,41 @@ function Lightbox({
   onPrev: () => void;
   onNext: () => void;
 }) {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+
+  // Auto-focus the close button when the dialog opens.
+  useEffect(() => {
+    closeBtnRef.current?.focus();
+  }, []);
+
+  // Trap Tab focus inside the dialog. Without this, Tab escapes to the
+  // page elements behind the modal, which is a real a11y bug for any
+  // role="dialog" aria-modal="true" element.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+      const focusables = dialogRef.current?.querySelectorAll<HTMLElement>(
+        'button:not([disabled])',
+      );
+      if (!focusables || focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, []);
+
   return (
     <div
+      ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-label="Image viewer"
@@ -188,13 +221,14 @@ function Lightbox({
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
     >
       <button
+        ref={closeBtnRef}
         type="button"
         onClick={(e) => {
           e.stopPropagation();
           onClose();
         }}
         aria-label="Close image"
-        className="absolute right-4 top-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
+        className="absolute right-4 top-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
       >
         <X className="h-6 w-6" aria-hidden="true" />
       </button>
@@ -208,7 +242,7 @@ function Lightbox({
               onPrev();
             }}
             aria-label="Previous image"
-            className="absolute left-2 top-1/2 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 md:left-6"
+            className="absolute left-2 top-1/2 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white md:left-6"
           >
             <ChevronLeft className="h-7 w-7" aria-hidden="true" />
           </button>
@@ -219,7 +253,7 @@ function Lightbox({
               onNext();
             }}
             aria-label="Next image"
-            className="absolute right-2 top-1/2 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 md:right-6"
+            className="absolute right-2 top-1/2 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white md:right-6"
           >
             <ChevronRight className="h-7 w-7" aria-hidden="true" />
           </button>

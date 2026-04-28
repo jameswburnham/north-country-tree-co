@@ -49,7 +49,7 @@ const SERVICES: Service[] = [
 
 export default function Services() {
   return (
-    <section id="services" className="bg-cream py-20 md:py-28">
+    <section id="services" className="scroll-mt-20 bg-cream py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <div className="mb-12 text-center md:mb-16">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-forest">

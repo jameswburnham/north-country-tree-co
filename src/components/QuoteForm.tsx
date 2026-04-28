@@ -143,7 +143,7 @@ export default function QuoteForm() {
                 >
                   {status === 'submitting' ? 'Sending…' : 'Request Free Quote'}
                 </button>
-                <p className="text-xs text-charcoal/55">
+                <p className="text-xs text-charcoal/70">
                   We never share your information.
                 </p>
               </div>

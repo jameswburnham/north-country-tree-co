@@ -33,7 +33,6 @@ export default function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6 md:py-4">
         <a
           href="#main"
-          aria-label="North Country Tree Co. home"
           className="rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
         >
           <Logo />

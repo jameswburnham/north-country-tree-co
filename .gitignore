@@ -42,6 +42,9 @@ next-env.d.ts
 # local Claude Code dev tooling (CLAUDE.md at project root is intentionally tracked)
 .claude/
 
+# private outreach tracker — local working doc, never ship to repo
+/outreach.md
+
 # stray asset files at project root — real assets live in /public
 /*.jpg
 /*.jpeg
